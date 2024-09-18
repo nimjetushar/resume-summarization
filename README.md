@@ -1,3 +1,12 @@
 # resume-summarization
 
-{\n  "summary": "Experienced product management professional with 8+ years of experience in business analysis and product development.",\n  "name": "PUSHKAR MASODKAR",\n  "experienceYears": 9\n}\n```'}
+Output:
+```
+{
+  "candidateName": "PUSHKAR MASODKAR",
+  "experienceYears": 8,
+  "summaryText": {
+    "text": "Achievement-driven professional with 8+ years of experience in business analysis and product management, targeting assignments in Product Management with an organization of high repute."
+  }
+}
+```
