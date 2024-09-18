@@ -1,7 +1,8 @@
 from PyPDF2 import PdfReader
 
 def read_pdf():
-    reader = PdfReader('./Pushkar Masodkar Resume .pdf')
+    print("Reading resume...")
+    reader = PdfReader('./resumes/Pushkar Masodkar Resume .pdf')
 
     number_of_pages = len(reader.pages)
     print("Total Pages: ", number_of_pages)
@@ -12,4 +13,5 @@ def read_pdf():
         page = reader.pages[page_number]
         page_content += page.extract_text()
 
+    print("Resume read")
     return page_content
