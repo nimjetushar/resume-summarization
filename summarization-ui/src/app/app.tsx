@@ -1,11 +1,6 @@
-import {
-  Box,
-  CircularProgress,
-  Container,
-  createTheme,
-  ThemeProvider,
-} from '@mui/material';
+import {Box, Container, createTheme, ThemeProvider} from '@mui/material';
 import {Dashboard} from './dashboard/dashboard';
+import {Filter} from './filter/filter';
 import {Header} from './header';
 import {useFetchData} from './hooks/useFetchData';
 
@@ -23,13 +18,8 @@ export const App = () => {
       <Header />
       <Container>
         <Box mt={2}>
-          {loading ? (
-            <Box sx={{display: 'flex', justifyContent: 'center'}}>
-              <CircularProgress />
-            </Box>
-          ) : (
-            <Dashboard data={candidates} />
-          )}
+          <Filter sx={{mb: 4}} />
+          <Dashboard data={candidates} loading={loading} />
         </Box>
       </Container>
     </ThemeProvider>
