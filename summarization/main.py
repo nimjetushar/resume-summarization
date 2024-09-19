@@ -1,5 +1,5 @@
 from llama import llama3
-from pdfreader import read_pdf
+from pdf_reader import read_pdf
 import time
 
 start_time = time.time()

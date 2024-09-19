@@ -2,7 +2,7 @@ from PyPDF2 import PdfReader
 
 def read_pdf():
     print("Reading resume...")
-    reader = PdfReader('./resumes/Pushkar Masodkar Resume .pdf')
+    reader = PdfReader("./resumes/Pushkar Masodkar Resume .pdf")
 
     number_of_pages = len(reader.pages)
     print("Total Pages: ", number_of_pages)
