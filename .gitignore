@@ -1,3 +1,6 @@
 .DS_Store
 __pycache__
 .idea
+.nx
+.vscode
+.node_modules
