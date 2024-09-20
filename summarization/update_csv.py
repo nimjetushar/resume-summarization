@@ -16,10 +16,10 @@ def update_file(list_of_candidate):
             writer.writerow([
                 "" if hasattr(candidate, "name") else candidate["name"],
                 "" if hasattr(candidate, "gender") else candidate["gender"],
-                "",
-                "",
+                "" if hasattr(candidate, "email_id") else candidate["email_id"],
+                "" if hasattr(candidate, "mobile_number") else candidate["mobile_number"],
                 summary,
-                "10",
+                "" if hasattr(candidate, "total_experience") else candidate["total_experience"],
                 "" if hasattr(candidate, "technical_skills") else candidate["technical_skills"],
                 "" if hasattr(candidate, "companies_worked_with") else candidate["companies_worked_with"]
             ])

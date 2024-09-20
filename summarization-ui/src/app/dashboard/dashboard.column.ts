@@ -7,14 +7,26 @@ export const dashboardColumns: DashboardColumn[] = [
   },
   {
     label: 'Email Id',
-    value: 'emailId',
+    value: 'email',
   },
   {
     label: 'Mobile number',
-    value: 'mobile',
+    value: 'contactNumber',
   },
   {
     label: 'Gender',
     value: 'gender',
+  },
+  {
+    label: 'Summary',
+    value: 'summary',
+  },
+  {
+    label: 'Skills',
+    value: 'skills',
+  },
+  {
+    label: 'Companies',
+    value: 'companyWorkedFor',
   },
 ];

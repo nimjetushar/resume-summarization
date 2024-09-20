@@ -1,9 +1,11 @@
 import FilterListIcon from '@mui/icons-material/FilterList';
-import {Box, SxProps, TextField} from '@mui/material';
+import {Box, SxProps, TextField, Tooltip} from '@mui/material';
 import React, {useState} from 'react';
+import {Filter as FilterParam} from '../types/candidate';
 import {FilterPopup} from './filter-popup';
 
 type Props = {
+  applyFilter: (filter: FilterParam) => void;
   sx?: SxProps;
 };
 
@@ -15,13 +17,16 @@ export const Filter: React.FC<Props> = (props) => {
       <TextField id="name" label="Search by name" variant="standard" />
 
       <Box ml={2}>
-        <FilterListIcon
-          style={{cursor: 'pointer'}}
-          onClick={() => setOpenDialog(true)}
-        />
+        <Tooltip title="Advance filter">
+          <FilterListIcon
+            style={{cursor: 'pointer'}}
+            onClick={() => setOpenDialog(true)}
+          />
+        </Tooltip>
         <FilterPopup
           open={openDialog}
           closeDialog={() => setOpenDialog(false)}
+          applyFilter={props.applyFilter}
         />
       </Box>
     </Box>

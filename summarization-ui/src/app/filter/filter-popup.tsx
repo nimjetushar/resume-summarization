@@ -12,11 +12,6 @@ import Grid from '@mui/material/Grid2';
 import {useState} from 'react';
 import {Filter} from '../types/candidate';
 
-type Props = {
-  open: boolean;
-  closeDialog: () => void;
-};
-
 const style = {
   position: 'absolute',
   top: '50%',
@@ -34,6 +29,12 @@ const initialState: Filter = {
   yearOfExperience: '',
 };
 
+type Props = {
+  open: boolean;
+  closeDialog: () => void;
+  applyFilter: (filter: Filter) => void;
+};
+
 export const FilterPopup: React.FC<Props> = (props) => {
   const [filter, setFilter] = useState<Filter>({...initialState});
 
@@ -45,7 +46,8 @@ export const FilterPopup: React.FC<Props> = (props) => {
   };
 
   const searchHandler = () => {
-    console.log(filter);
+    props.applyFilter(filter);
+    props.closeDialog();
   };
 
   return (
