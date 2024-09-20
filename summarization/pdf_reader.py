@@ -1,8 +1,10 @@
+import os
+
 from PyPDF2 import PdfReader
 
-def read_pdf():
+def read_pdf(f):
     print("Reading resume...")
-    reader = PdfReader("./resumes/Pushkar Masodkar Resume .pdf")
+    reader = PdfReader(f)
 
     number_of_pages = len(reader.pages)
     print("Total Pages: ", number_of_pages)
@@ -15,3 +17,14 @@ def read_pdf():
 
     print("Resume read")
     return page_content
+
+def read_all_file():
+    directory = "./resumes"
+
+    for fileName in os.listdir(directory):
+        f = os.path.join(directory, fileName)
+
+        if (os.path.isfile(f) and ".pdf" in f):
+            print(f)
+
+read_all_file()

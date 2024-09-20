@@ -3,8 +3,7 @@ import requests
 url = "http://localhost:11434/api/generate"
 
 prompt = """
-Your task is to summarize CV based on provided instructions and respond in json format only.
-
+Your task is to summarize CV and respond in json format only.
 CV content is delimited by triple backticks.
 
 #####
