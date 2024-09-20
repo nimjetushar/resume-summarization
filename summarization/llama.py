@@ -1,6 +1,6 @@
 import requests
 
-url = "http://localhost:11434/api/chat"
+url = "http://localhost:11434/api/generate"
 
 prompt = """
 Your task is to summarize CV based on provided instructions and respond in json format only.
@@ -30,12 +30,8 @@ def llama3(pdf_content):
 
     data = {
         "model": "llama3.1",
-        "messages": [
-            {
-                "role": "user",
-                "content": prompt_with_content
-            }
-        ],
+        "prompt": prompt_with_content,
+        "format": "json",
         "stream": False,
     }
 
