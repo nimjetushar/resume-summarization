@@ -17,4 +17,5 @@ export type DashboardColumn = {
 export type Filter = {
   gender: string;
   yearOfExperience: string;
+  skills: string[];
 };

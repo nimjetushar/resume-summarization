@@ -1,16 +1,23 @@
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import CloseIcon from '@mui/icons-material/Close';
 import {
+  Autocomplete,
   Box,
   Button,
+  Checkbox,
   FormControl,
+  IconButton,
   InputLabel,
   MenuItem,
   Modal,
   Select,
+  TextField,
   Typography,
 } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import {useState} from 'react';
-import {Filter} from '../types/candidate';
+import {Filter} from '../../types/candidate';
 
 const style = {
   position: 'absolute',
@@ -27,7 +34,13 @@ const style = {
 const initialState: Filter = {
   gender: '',
   yearOfExperience: '',
+  skills: [],
 };
+
+const listOfSkills = ['Java', 'Angular', 'Html'];
+
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 type Props = {
   open: boolean;
@@ -38,7 +51,7 @@ type Props = {
 export const FilterPopup: React.FC<Props> = (props) => {
   const [filter, setFilter] = useState<Filter>({...initialState});
 
-  const changeHandler = (value: string, field: keyof Filter) => {
+  const changeHandler = (value: string | string[], field: keyof Filter) => {
     setFilter({
       ...filter,
       [field]: value,
@@ -58,13 +71,24 @@ export const FilterPopup: React.FC<Props> = (props) => {
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
-        <Typography id="modal-modal-title" variant="h6" component="h2">
-          Search
-        </Typography>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignContent: 'center',
+          }}
+        >
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Search
+          </Typography>
+          <IconButton onClick={props.closeDialog}>
+            <CloseIcon />
+          </IconButton>
+        </Box>
         <Box sx={{mt: 2}}>
           <Grid container spacing={4}>
             <Grid size={6}>
-              <FormControl fullWidth variant="standard">
+              <FormControl fullWidth variant="outlined">
                 <InputLabel id="year-of-experience">
                   Year of experience
                 </InputLabel>
@@ -85,7 +109,7 @@ export const FilterPopup: React.FC<Props> = (props) => {
               </FormControl>
             </Grid>
             <Grid size={6}>
-              <FormControl fullWidth variant="standard">
+              <FormControl fullWidth variant="outlined">
                 <InputLabel id="gender">Gender</InputLabel>
                 <Select
                   labelId="gender"
@@ -101,6 +125,44 @@ export const FilterPopup: React.FC<Props> = (props) => {
                 </Select>
               </FormControl>
             </Grid>
+          </Grid>
+          <Grid container spacing={4} mt={2}>
+            <Grid size={6}>
+              <FormControl fullWidth variant="outlined">
+                <Autocomplete
+                  sx={{width: '100% !important'}}
+                  multiple
+                  id="skills"
+                  options={listOfSkills}
+                  disableCloseOnSelect
+                  value={filter.skills}
+                  onChange={(_, newValue) => changeHandler(newValue, 'skills')}
+                  renderOption={(props, option, {selected}) => {
+                    const {key, ...optionProps} = props;
+                    return (
+                      <li key={key} {...optionProps}>
+                        <Checkbox
+                          icon={icon}
+                          checkedIcon={checkedIcon}
+                          style={{marginRight: 8}}
+                          checked={selected}
+                        />
+                        {option}
+                      </li>
+                    );
+                  }}
+                  style={{width: 500}}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Skills"
+                      placeholder="Skills"
+                    />
+                  )}
+                />
+              </FormControl>
+            </Grid>
+            <Grid size={6}></Grid>
           </Grid>
         </Box>
         <Box mt={4} sx={{display: 'flex', justifyContent: 'end'}}>

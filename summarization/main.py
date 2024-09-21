@@ -1,9 +1,8 @@
-import json
 import os
 import time
-from llama import llama3
+from dump_data import create_excel
+from llama import summarize_cv
 from pdf_reader import read_pdf
-from update_csv import update_file
 
 start_time = time.time()
 directory = "./resumes"
@@ -14,12 +13,11 @@ for fileName in os.listdir(directory):
 
     if os.path.isfile(f) and ".pdf" in f:
         pdf_content = read_pdf(f)
-        response = llama3(pdf_content)
-        json_data = json.loads(response["response"])
-        print(json_data)
-        list_of_candidate.append(json_data)
+        cv_content = summarize_cv(pdf_content)
+        print(cv_content)
+        list_of_candidate.append(cv_content)
 
 print("Time required for execution --- %s seconds ---" % (time.time() - start_time))
-update_file(list_of_candidate)
+create_excel(list_of_candidate)
 
 

@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {CandidateEntity} from '../types/candidate';
 
-const endpoint = 'http://localhost:8080/load/all';
+const endpoint = 'http://localhost:8080/api/candidates/load/all';
 
 export const useFetchData = () => {
   const [loading, setLoading] = useState(false);
@@ -12,7 +12,7 @@ export const useFetchData = () => {
     fetch(endpoint)
       .then((res) => res.json())
       .then((response) => {
-        setLoading(true);
+        setLoading(false);
         setCandidates(response.data);
       })
       .catch((err) => {

@@ -9,11 +9,6 @@ export const useFilter = (candidates: CandidateEntity[]) => {
     CandidateEntity[]
   >([]);
 
-  useEffect(() => {
-    setFilteredCandidate(candidates);
-    setInitialCandidateData(candidates);
-  }, [candidates]);
-
   const applyFilter = (filter: Filter) => {
     const filterBy = Object.fromEntries(
       Object.entries({...filter}).filter(([, v]) => !!v)
@@ -28,7 +23,15 @@ export const useFilter = (candidates: CandidateEntity[]) => {
         if (identifier === 'yearOfExperience') {
           return item > filterBy[identifier];
         }
-        if (item.toLowerCase() !== filterBy[identifier].toLowerCase()) {
+
+        if (identifier === 'skills') {
+          return (filterBy[identifier] as string[]).some((i) =>
+            item.toLowerCase().includes(i.toLowerCase())
+          );
+        }
+        if (
+          item.toLowerCase() !== (filterBy[identifier] as string).toLowerCase()
+        ) {
           return false;
         }
       }
@@ -38,5 +41,19 @@ export const useFilter = (candidates: CandidateEntity[]) => {
     setFilteredCandidate(filteredData);
   };
 
-  return {filteredCandidate, applyFilter};
+  const filterByName = (name: string) => {
+    if (name) {
+      const filteredData = initialCandidateData.filter((candidate) =>
+        candidate.name.toLowerCase().includes(name.toLowerCase())
+      );
+      setFilteredCandidate(filteredData);
+    }
+  };
+
+  useEffect(() => {
+    setFilteredCandidate(candidates);
+    setInitialCandidateData(candidates);
+  }, [candidates]);
+
+  return {filteredCandidate, applyFilter, filterByName};
 };

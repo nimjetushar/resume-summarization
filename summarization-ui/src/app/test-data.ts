@@ -7,7 +7,7 @@ export const candidateData: CandidateEntity[] = [
     contactNumber: '12312435',
     email: 'adas',
     gender: 'male',
-    skills: '',
+    skills: 'java, angular',
     summary: '',
     yearOfExperience: '2',
   },

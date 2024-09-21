@@ -1,9 +1,7 @@
 import {Box, Container, createTheme, ThemeProvider} from '@mui/material';
-import {Dashboard} from './dashboard/dashboard';
-import {Filter} from './filter/filter';
+import {BrowserRouter} from 'react-router-dom';
 import {Header} from './header';
-import {useFetchData} from './hooks/useFetchData';
-import {useFilter} from './hooks/useFilter';
+import {AppRoute} from './route';
 
 const darkTheme = createTheme({
   palette: {
@@ -12,18 +10,16 @@ const darkTheme = createTheme({
 });
 
 export const App = () => {
-  const {loading, candidates} = useFetchData();
-  const {filteredCandidate, applyFilter} = useFilter(candidates);
-
   return (
     <ThemeProvider theme={darkTheme}>
-      <Header />
-      <Container>
-        <Box mt={2}>
-          <Filter sx={{mb: 4}} applyFilter={applyFilter} />
-          <Dashboard data={filteredCandidate} loading={loading} />
-        </Box>
-      </Container>
+      <BrowserRouter>
+        <Header />
+        <Container>
+          <Box mt={2}>
+            <AppRoute />
+          </Box>
+        </Container>
+      </BrowserRouter>
     </ThemeProvider>
   );
 };
