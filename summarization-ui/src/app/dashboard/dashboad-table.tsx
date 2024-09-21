@@ -12,6 +12,7 @@ import {
 import {useState} from 'react';
 import {CandidateEntity} from '../types/candidate';
 import {dashboardColumns} from './dashboard.column';
+import {elipsisData, modifyData} from './data.utility';
 import {SummaryPopup} from './summary-popup/summary-popup';
 
 type Props = {
@@ -20,6 +21,8 @@ type Props = {
 
 export const DashboardTable: React.FC<Props> = (props) => {
   const [dialogData, setDialogData] = useState<CandidateEntity | null>(null);
+
+  const data = modifyData(props.data);
 
   return (
     <>
@@ -34,13 +37,15 @@ export const DashboardTable: React.FC<Props> = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.data.map((row, idx) => (
+            {data.map((row, idx) => (
               <TableRow
                 key={idx}
                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
               >
                 {dashboardColumns.map((column) => (
-                  <TableCell key={column.value}>{row[column.value]}</TableCell>
+                  <TableCell key={column.value}>
+                    {elipsisData(row[column.value])}
+                  </TableCell>
                 ))}
                 <TableCell>
                   <IconButton onClick={() => setDialogData(row)}>
